@@ -22,6 +22,8 @@ public class VentadaAhorcado extends javax.swing.JFrame {
     private void chequeaBoton(JButton botonPulsado)
     {
         botonPulsado.setVisible(false);
+       
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -25,14 +25,26 @@ public class VentadaAhorcado extends javax.swing.JFrame {
     private void chequeaLetra(String letra)
     {
       //guardo el texto de la pantalla en un string auxiliar.
-      String palabraConGuiones = jLabel1.getText();
-      
+      String palabraConGuiones = jLabel1.getText(); 
      //paso la letra a mayuscula
      //letra = letra.toUpperCase();
+      
       if (palabraOculta.contains(letra))
           //la letra esta en la palabra oculta.
       {
           //desocultar la letra en la pantalla
+          for (int i=0; i<palabraOculta.length(); i++)
+          {
+              if(palabraOculta.charAt(i) == letra.charAt(0))
+              {
+                  //si hemos llegado aquí es porque la letra está en la palabra oculta.
+                  //palabraConGuiones[2*i] = letra;
+                  palabraConGuiones = palabraConGuiones.substring(0, 2*i)+ 
+                                      letra+ 
+                                      palabraConGuiones.substring(2*i + 1);
+              }
+          }
+          jLabel1.setText(palabraConGuiones);
           //quitar el guion bajo.
       }
       else

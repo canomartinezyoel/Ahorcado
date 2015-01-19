@@ -1,4 +1,10 @@
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 /*
@@ -17,6 +23,35 @@ public class VentadaAhorcado extends javax.swing.JFrame {
     
     //contadro para el numero de fallos.
     int numeroFallos = 0;
+    
+    @Override
+    public void paint (Graphics g)
+    {
+        super.paint(g);
+        g = jPanel1.getGraphics();
+        
+        //cargamos una imagen.
+        Image miImagen = null;
+        try {
+            
+            switch (numeroFallos)
+            {
+                case 0: miImagen = ImageIO.read(getClass().getResource("/ahorcado_0.png")); break;
+                case 1: miImagen = ImageIO.read(getClass().getResource("/ahorcado_1.png")); break;
+                case 2: miImagen = ImageIO.read(getClass().getResource("/ahorcado_2.png")); break;
+                case 3: miImagen = ImageIO.read(getClass().getResource("/ahorcado_3.png")); break;
+                case 4: miImagen = ImageIO.read(getClass().getResource("/ahorcado_4.png")); break;
+                case 5: miImagen = ImageIO.read(getClass().getResource("/ahorcado_5.png")); break;
+                case -100: miImagen = ImageIO.read(getClass().getResource("/acertasteTodo.png")); break;
+                default : miImagen = ImageIO.read(getClass().getResource("/ahorcado_fin.png")); break;
+            } 
+            
+        } catch (IOException ex) {
+            
+        }
+        g.drawImage(miImagen, 0, 0, jPanel1.getWidth(), jPanel1.getHeight(), null);
+    }
+    
     public VentadaAhorcado() {
         initComponents();
     }
@@ -53,6 +88,15 @@ public class VentadaAhorcado extends javax.swing.JFrame {
           numeroFallos++;
           jLabel2.setText(String.valueOf(numeroFallos));
       }
+      
+      //para ver si todas la letras están descubiertas.
+      if(!palabraConGuiones.contains("_"))
+      {
+          numeroFallos = -100;
+      }
+      
+      
+      repaint();
     }
     
     //recibe el boton que ha sido pulsado
@@ -114,14 +158,14 @@ public class VentadaAhorcado extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGap(0, 230, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGap(0, 230, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 230, 230));
 
         jButton1.setText("A");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
